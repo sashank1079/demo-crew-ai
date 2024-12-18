@@ -1,0 +1,28 @@
+[project]
+name = "car_dealer"
+version = "0.1.0"
+description = "car-dealer using crewAI"
+authors = [{ name = "Sashank machiraju", email = "sashank@easybee.ai" }]
+requires-python = ">=3.10,<=3.13"
+dependencies = [
+    "crewai[tools]>=0.80.0,<1.0.0",
+    "openai>=1.30.0,<2.0.0",
+    "langchain>=0.1.0,<1.0.0",
+    "langchain-community>=0.1.0,<1.0.0",
+    "langchain-openai>=0.1.0,<1.0.0",
+    "langchain-core>=0.1.0,<1.0.0",
+    "langchain-community>=0.1.0,<1.0.0",
+    "langchain-openai>=0.1.0,<1.0.0",
+    "langchain-core>=0.1.0,<1.0.0",
+]
+
+[project.scripts]
+car_dealer = "car_dealer.main:run"
+run_crew = "car_dealer.main:run"
+train = "car_dealer.main:train"
+replay = "car_dealer.main:replay"
+test = "car_dealer.main:test"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
