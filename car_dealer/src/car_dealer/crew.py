@@ -11,11 +11,14 @@ class VehicleSalesCrew:
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
 
+
+
     @agent
     def researcher_agent(self) -> Agent:
         return Agent(
             **self.agents_config['researcher_agent'],
             verbose=False
+            
         )
 
     @agent
@@ -39,6 +42,13 @@ class VehicleSalesCrew:
             verbose=False
         )
 
+    @agent
+    def manager_agent(self) -> Agent:
+        return Agent(
+            **self.agents_config['manager_agent'],
+            verbose=False
+        )
+        
     @task
     def fetch_vehicle_info(self) -> Task:
         return Task(
@@ -63,6 +73,26 @@ class VehicleSalesCrew:
             **self.tasks_config['process_payment']
         )
 
+    def decide_task(self, user_input: str) -> str:
+        """
+        Decide which task to delegate based on the user input.
+
+        Args:
+            user_input (str): The user's query.
+
+        Returns:
+            str: The name of the task to handle the query.
+        """
+        if "price" in user_input or "cost" in user_input:
+            return "analyze_data"
+        elif "features" in user_input or "info" in user_input:
+            return "fetch_vehicle_info"
+        elif "buy" in user_input or "payment" in user_input:
+            return "process_payment"
+        else:
+            return "customer_interaction"
+        
+
     @crew
     def crew(self) -> Crew:
         return Crew(
@@ -78,8 +108,9 @@ class VehicleSalesCrew:
                 self.customer_interaction(),
                 self.process_payment()
             ],
-            process=Process.sequential,
-            verbose=False,
+            process=Process.hierarchical,
+            manager_agent=self.manager_agent(),
+            verbose=True,
             memory=True,
-            human_input=True
         )
+        

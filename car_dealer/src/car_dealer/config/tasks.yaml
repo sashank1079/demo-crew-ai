@@ -4,7 +4,7 @@ fetch_vehicle_info:
   expected_output: >
     "The car comes with features like [list features]. The base model starts at $XYZ. Is there anything else you'd like to know?"
   agent: researcher_agent
-  human_input: true
+
 
 analyze_data:
   description: >
@@ -12,7 +12,6 @@ analyze_data:
   expected_output: >
     "The car does have a retractable rear window, and the pricing is as follows: [details]. Would you like more information?"
   agent: analyst_agent
-  human_input: true
 
 customer_interaction:
   description: >
@@ -20,7 +19,6 @@ customer_interaction:
   expected_output: >
     "That's great to hear! What other details would you like to know before making your decision?"
   agent: sales_agent
-  human_input: true
 
 process_payment:
   description: >
@@ -28,4 +26,3 @@ process_payment:
   expected_output: >
     "Thank you for your purchase! Let me guide you through the payment process. Which payment method would you like to use?"
   agent: accounting_agent
-  human_input: true
